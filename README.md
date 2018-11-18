@@ -142,7 +142,7 @@ Et voila!
 
 **Hint:** Look Closely
 
-**File:** Corrupted PNG Image
+**[File:](https://github.com/feresg/RITSEC-CTF/blob/master/stegosaurus.png)**
 
 **Solving the challenge:**
 
