@@ -3,6 +3,7 @@
 My first CTF Writeup, be gentle!*
 
 **Challenges solved:**
+
 | Challenge               | Category  | Points |
 |-------------------------|-----------|--------|
 | Who drew on my program? | Crypto    | 350    |
@@ -40,6 +41,7 @@ Missing data:
 * Initialization Vector (IV)
 
 In order to resolve the challenge we need to find the missing data. We can do that by reversing the process of the algorithm.
+
 **Finding the correct keys:**
 
 1- We create a list of all possible chars
