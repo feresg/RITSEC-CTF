@@ -1,5 +1,8 @@
 # RITSEC CTF 2018 Writeup
 *Write up by: Feres Gaaloul (https://github.com/feresg)
+
+Team: CriticalError
+
 My first CTF Writeup, be gentle!*
 
 **Challenges solved:**
