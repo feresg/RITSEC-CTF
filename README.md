@@ -15,14 +15,20 @@ My first CTF Writeup, be gentle!*
 ## Who drew on my program?
 
 **Hint:** I don't remember what my IV was I used for encryption and then someone painted over my code :(. Hopefully somebody else wrote it down!
+
 **[File:](https://github.com/feresg/RITSEC-CTF/blob/master/crypto.png)** 
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/crypto.png)
 
 **Solving the challenge:**
+
 This image represents a python script for encrypting a string using the AES/CBC encryption.
 Here's how the algorithm decrypts data:
+
 ![enter image description here](https://i.stack.imgur.com/dFjX3.png)
-Some variables are either hidden or partially present:
+
+Some variables are either hidden or partially present.
+
 Complete data : 
 * Message/Plaintext : 32 byte message
 
@@ -35,6 +41,7 @@ Missing data:
 
 In order to resolve the challenge we need to find the missing data. We can do that by reversing the process of the algorithm.
 **Finding the correct keys:**
+
 1- We create a list of all possible chars
 2- Nested for loops allows us to create all possible 2 char combos to finish the missing key combos (128*128 = 16384 possible combos) 
 possible_key = partial_key + ch1 + ch2
@@ -43,6 +50,7 @@ possible_key = partial_key + ch1 + ch2
 but we only have 3 bytes of cipher block 0. We can check if our current key is correct by applying XOR only on the first and last (and possibly 14th) byte of both decrypted_block_1 and cipher_block_0. If we get the same results as the characters 'r' and '!' respectively, we can consider the currect key as correct.
 
 **Finding the correct IVs:**
+
 1- Now that we have the correct key(s) we can complete the previous cipher block (cipher_block_0)
 message[16:] = decrypted_block_1 XOR cipher_block_0
 is equivalent to
@@ -122,36 +130,54 @@ print(possible_ivs)
 ```
 
 **Output:**
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_cipher.png)
+
 Et voila!
 
 
 ## I am a Stegosaurus
 
 **Hint:** Look Closely
+
 **File:** Corrupted PNG Image
+
 **Solving the challenge:**
+
 This file seems to have a signature of a PNG file it isn't an archive in disguise. Applying [pngcheck](http://www.libpng.org/pub/png/apps/pngcheck.html) shows us that part of the PNG signature is corrupted (*CRC error in chunk IHDR*).
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_forensics.png)
+
 I found this C program ([pngcsum](http://schaik.com/png/pngcsum.html)) online that fixes a png header because i'm too lazy to code it myself and reuse is great! 
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_forensics2.png)
+
 The fixed image contains the flag! Yay!
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/stegosaurus_fixed.png)
 
 ## The tangled web
 
 **Website:** [fun.ritsec.club:8007](fun.ritsec.club:8007)
+
 **Solving the challenge:**
+
 Buddha himself Nabil Houidi stumbled on this char sequence while reading the source code of one of the many links that this unfunny rick rolling website takes you to.
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_web.png)
+
 Applying base64 decoding on that char sequence gives us the flag!
+
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_web2.png)
 
 ## Space Force
 
-Website:  [fun.ritsec.club:8005](fun.ritsec.club:8005)
-Hint: The Space Force has created a portal for the public to learn about and be in awe of our most elite Space Force Fighters. Check it out at  `fun.ritsec.club:8005`!
+**Website:**  [fun.ritsec.club:8005](fun.ritsec.club:8005)
+
+**Hint:** The Space Force has created a portal for the public to learn about and be in awe of our most elite Space Force Fighters. Check it out at  `fun.ritsec.club:8005`!
+
 **Solving the challenge:**
+
 Solved again by Nabil Houidi (SQL Injection)
 
 
