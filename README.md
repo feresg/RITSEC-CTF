@@ -48,21 +48,31 @@ In order to resolve the challenge we need to find the missing data. We can do th
 **Finding the correct keys:**
 
 1- We create a list of all possible chars
+
 2- Nested for loops allows us to create all possible 2 char combos to finish the missing key combos (128*128 = 16384 possible combos) 
 possible_key = partial_key + ch1 + ch2
+
 3- We decrypt cipher_block_1 only using AES ECB decryption. We obtain decrypted_cipher_block_1
+
 4- message[16:] = decrypted_block_1 XOR cipher_block_0
 but we only have 3 bytes of cipher block 0. We can check if our current key is correct by applying XOR only on the first and last (and possibly 14th) byte of both decrypted_block_1 and cipher_block_0. If we get the same results as the characters 'r' and '!' respectively, we can consider the currect key as correct.
 
 **Finding the correct IVs:**
 
 1- Now that we have the correct key(s) we can complete the previous cipher block (cipher_block_0)
+
 message[16:] = decrypted_block_1 XOR cipher_block_0
+
 is equivalent to
+
 cipher_block_0 = decrypted_block_1 XOR mesage[16:]
+
 2- Now we can guess the possible IVs
+
 message[:16] = decrypted_block_0 XOR IV
+
 IV = decrypted_block_0 XOR message[:16]
+
 decrypted_block_0 is found by applying AES ECB decryption on the filtered keys
 
 The IV is our flag!
