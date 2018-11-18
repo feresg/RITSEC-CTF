@@ -55,7 +55,12 @@ possible_key = partial_key + ch1 + ch2
 3- We decrypt cipher_block_1 only using AES ECB decryption. We obtain decrypted_cipher_block_1
 
 4- message[16:] = decrypted_block_1 XOR cipher_block_0
-but we only have 3 bytes of cipher block 0. We can check if our current key is correct by applying XOR only on the first and last (and possibly 14th) byte of both decrypted_block_1 and cipher_block_0. If we get the same results as the characters 'r' and '!' respectively, we can consider the currect key as correct.
+
+But we only have 3 bytes of cipher block 0. 
+
+We can check if our current key is correct by applying XOR only on the first and last (and possibly 14th) byte of both decrypted_block_1 and cipher_block_0. 
+
+If we get the same results as the characters 'r' and '!' respectively, we can consider the currect key as correct.
 
 **Finding the correct IVs:**
 
