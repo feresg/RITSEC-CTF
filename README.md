@@ -11,6 +11,7 @@ My first CTF Writeup, be gentle!*
 |-------------------------|-----------|--------|
 | Who drew on my program? | Crypto    | 350    |
 | I am a stegosaurus      | Forensics | 250    |
+| What a cute dog!        | Web       | 350    |
 | The tangled web         | Web       | 200    |
 | Space force             | Web       | 100    |
 | Talk to me              | Misc      | 10     |
@@ -175,6 +176,23 @@ I found this C program ([pngcsum](http://schaik.com/png/pngcsum.html)) online th
 The fixed image contains the flag! Yay!
 
 ![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/stegosaurus_fixed.png)
+
+## What a cute dog!
+
+**Website:** [fun.ritsec.club:8008](fun.ritsec.club:8008)
+
+**Hint:** This dog is shockingly cute!
+
+**Solving the challenge:**
+
+The cgi-bin folder in the public website directory indicated that this is possibly a shellshock exploit challenge. Indeed a shellshock test indicated that the website is vulnerable, we just need to access the command line to find the flag in the server using the shell.
+
+![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_web3.png)
+
+A curl command allowed us to access the server shell and find the flag in a flag.txt file!
+
+![enter image description here](https://github.com/feresg/RITSEC-CTF/raw/master/screenshot_web4.png)
+
 
 ## The tangled web
 
